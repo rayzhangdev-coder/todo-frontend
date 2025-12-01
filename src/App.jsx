@@ -5,7 +5,7 @@ import TodoItem from './components/TodoItem';
 //im using pessimistic ui
 //npm run dev
 
-const base_url = "http://localhost:3000/todos";
+const base_url = "https://ray-todo-api.onrender.com/todos";
 function App() {
   //for todos array, caching as a local array
   const [todos, setTodos] = useState([]);
