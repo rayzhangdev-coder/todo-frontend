@@ -1,4 +1,4 @@
-# README: Cloud-Hosted Task Management Application - Client
+# FRONT END - Task Management Application
 
 ## Project Status
 
