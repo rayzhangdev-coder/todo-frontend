@@ -34,6 +34,7 @@ A state-managed To-Do List application built with React.js. Connects to backend 
 2. `npm install`
 3. `npm run dev`
 
+---
 
 ### 5. Deploying the Frontend on Vercel
 
