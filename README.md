@@ -1,16 +1,35 @@
-# React + Vite
+# README: Cloud-Hosted Task Management Application - Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Status
 
-Currently, two official plugins are available:
+| Item | Status |
+| :--- | :--- |
+| **LIVE DEMO** | https://todo-frontend-eight-cyan.vercel.app/ |
+| **API Source** | https://github.com/rayzhangdev-coder/todo-backend |
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 1. Overview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+A responsive, state-managed To-Do List application built with React.js. This project follows a decoupled client-server architecture, focusing on smooth user interaction and asynchronous data handling via a REST API.
 
-## Expanding the ESLint configuration
+## 2. Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* Full CRUD (Create, Read, Update, Delete) functionality.
+* Responsive UI for mobile and desktop devices.
+* Pessimistic UI updates for reliable state management.
+
+## 3. Tech Stack
+
+| Category | Technologies |
+| :--- | :--- |
+| **Client** | React.js, HTML, CSS (Vite setup) |
+| **Deployment** | Vercel (CI/CD via GitHub) |
+
+---
+
+## 4. Setup and Run Locally
+
+1. Ensure the [Backend API] is running locally or deployed.
+2. `npm install`
+3. `npm run dev`
