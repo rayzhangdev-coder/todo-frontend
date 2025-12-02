@@ -30,6 +30,6 @@ A state-managed To-Do List application built with React.js. Connects to backend 
 
 ## 4. Setup and Run Locally
 
-1. Ensure the [Backend API] is running locally or deployed.
+1. Ensure the [[Backend API]](https://github.com/rayzhangdev-coder/todo-backend) is running locally or deployed.
 2. `npm install`
 3. `npm run dev`
