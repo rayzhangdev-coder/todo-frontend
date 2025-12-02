@@ -6,11 +6,14 @@ import TodoItem from './components/TodoItem';
 //npm run dev
 
 const base_url = "https://ray-todo-api.onrender.com/todos";
+// const base_url = "http://localhost:3000/todos";
 function App() {
   //for todos array, caching as a local array
   const [todos, setTodos] = useState([]);
   //you can't modify the stuff inside todos[] directly, you can only SET the entire STATE to something else using setTodos
   
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const getTodos = async() => {
       try{
@@ -24,6 +27,8 @@ function App() {
         setTodos(JSONdata);
       }catch(err){
         console.log(err);
+      }finally{
+        setIsLoading(false);
       }
     }
     getTodos();
@@ -101,21 +106,52 @@ function App() {
   //its also called JSX
   return (<div className="homepage">
     <h1>To-do List</h1>
-    <TodoForm
-    handleNewTodo = {addNewTodo}
-    />
-    <div className="todos">
-      {/* inside {} is JAVASCRIPT LAND, EVERYTHING IS JS */}
-      {/* key's are for repeaters */}
-      {todos.map(todo => (
-        <TodoItem
-        key = {todo.id} 
-        todo = {todo}
-        onToggle = {updateCompletionStatus}
-        onDelete = {deleteTodoFromList}
+    <span id="author">by Ray Zhang</span>
+
+    {/* ⭐️ CONDITIONAL RENDERING */}
+
+    {isLoading ? (
+      // Display the DISABLED search bar and the loading messages
+      <>
+        <div className="search-bar">
+          <input 
+            type="text" 
+            placeholder="Enter task here" 
+            id="search"
+            // NO functional props here
+            disabled={true}
+            style={{
+              cursor: 'not-allowed',
+              opacity: 0.6
+            }}
+          />
+        </div>
+        <div className="loading-message" style={{ marginTop: '28px', fontSize: '7em', color: 'rgb(85, 239, 234)' }}>
+          Loading, please wait...
+        </div>
+        <div className="loading-message" style={{ marginTop: '0px', fontSize: '3.5em', color: 'rgb(255,255,255)' }}>
+          (Note: Free tier server may take ~30s to load)
+      </div>
+      </>
+      
+    ) : (
+      // Once loading is false, render the form and the list
+      <>
+        <TodoForm
+          handleNewTodo = {addNewTodo}
         />
-      ))}
-    </div>
+        <div className="todos">
+          {todos.map(todo => (
+            <TodoItem
+              key = {todo.id} 
+              todo = {todo}
+              onToggle = {updateCompletionStatus}
+              onDelete = {deleteTodoFromList}
+            />
+          ))}
+        </div>
+      </>
+    )}
   </div>
   ) 
 }

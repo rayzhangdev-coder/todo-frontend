@@ -1,3 +1,5 @@
+/* app.css */
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -5,38 +7,124 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.homepage {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* This centers the children: h1, author, form, and the new 350px .todos block */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+#author{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-style: italic;
+  font-size: 1.2rem;
+  margin-top: -52px;
+  margin-bottom: 10px;
+  font-family: serif, Helvetica, Arial;
+}
+
+/*change border to change based on light or dark mode*/
+.search-bar {
+  margin-top: -2px; 
+  margin-bottom: 10px;
+}
+.search-bar input {
+  width: 190px;
+  height: 10px;
+  font-size: 14px;
+  padding: 10px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.9);
+  border: solid rgb(123, 123, 123)
+}
+
+/* Light mode */
+/*
+@media (prefers-color-scheme: light) {
+  .search-bar input {
+    border: 2px solid #000000; 
+    background-color: #ffffff;
+    color: #000000;
   }
-  to {
-    transform: rotate(360deg);
-  }
+}
+*/
+
+.delete-btn {
+  
+  /* Primary Text Color: Pure Red (for maximum contrast/warning) */
+  color: rgb(171, 22, 22) !important; 
+  
+  /* Smoother, integrated background */
+  background: linear-gradient(145deg, rgb(52, 45, 45), rgb(35, 30, 30));
+  
+  /* Softened Border: Removed harsh black border */
+  border: 1px solid rgba(0, 0, 0, 0.4); /* Border now a soft, transparent red */
+  
+  cursor: pointer;
+  
+  /* Rounded Corners for smoother look */
+  border-radius: 12px; /* Slightly more rounded than 10px */
+  
+  text-align: center;
+  width: 49px;/*was 50px*/
+  
+  /* Added Shadow for depth and contrast */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); 
+  
+  /* Use a transition for a smoother visual response when hovering/clicking */
+  transition: all 0.2s ease-in-out; 
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.delete-btn:hover {
+  color: rgb(255, 0, 0) !important; /* Lighter red text on hover */
+  background: linear-gradient(145deg, rgb(35, 30, 30), rgb(52, 45, 45)); /* Inverse gradient on hover */
+  box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2); /* Red glow effect */
+  transform: translateY(-1px); /* Slight lift */
+}
+/* .delete-btn:hover {
+  color: darkred;
+} */
+
+
+
+.todo-item {
+  display: flex; 
+  /* CHANGE: Use flex-start to pack items tightly to the left */
+  justify-content: flex-start; 
+  align-items: flex-start;
+  /* align-items: center; */
+  margin-bottom: 5px; 
+  /* Remove padding-right here, we'll use it on the text */
+  padding-right: 0; 
+  width: 100%; /* Ensure it spans the full width of the .todos container */
 }
 
-.card {
-  padding: 2em;
+.todos{
+  /* Remove width: 100%; */
+  /* Set a fixed width for the column, slightly wider than the title */
+  width: 280px;
+  /* Ensures the todo items start from the left of the container */
+  text-align: left;
+  /* Since its width is fixed, use margin auto to center it under the header */
+  margin-left: 25px
 }
 
-.read-the-docs {
-  color: #888;
+.checkbox{
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.todo-text {
+  font-family: Arial, Helvetica, sans-serif;
+  flex-grow: 1; /* Allows the text to take up all available space between the checkbox and button */
+  text-align: left; /* Explicitly align the text content to the left */
+  text-rendering: optimizeLegibility;
+  color: rgb(211, 211, 211)!important;
+
+  /* THIS line-height THING IS SO CRACKED */
+  line-height: 1.29;
+  margin-right: -6px;
 }
