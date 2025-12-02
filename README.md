@@ -11,7 +11,7 @@
 
 ## 1. Overview
 
-A responsive, state-managed To-Do List application built with React.js. This project follows a decoupled client-server architecture, focusing on smooth user interaction and asynchronous data handling via a REST API.
+A state-managed To-Do List application built with React.js. Connects to backend API.
 
 ## 2. Features
 
