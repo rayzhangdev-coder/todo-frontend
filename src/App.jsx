@@ -21,41 +21,57 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // *** NEW ***
-    // 1. Logic to get or generate the Session ID immediately on load
-    // *** NEW ***
-    // 1. Logic to get or generate the Session ID immediately on load
+    // 1. Check Local Storage
     let currentSessionId = localStorage.getItem("my-todo-session-id");
-    
-    // CHECK: Does an ID exist in the browser's storage?
+    let isNewUser = false; // Flag to track if we need to add default tasks
+
     if (!currentSessionId) {
-      // IF NOT: Generate a new one right now
       currentSessionId = uuidv4();
-      // AND: Save it to LocalStorage so we remember it next time
-      localStorage.setItem("user-session-id", currentSessionId);
+      localStorage.setItem("my-todo-session-id", currentSessionId);
+      isNewUser = true; // Mark them as a new user!
     }
     
-    setSessionId(currentSessionId); // Save to state for other functions to use
+    setSessionId(currentSessionId); 
 
-    const getTodos = async() => {
-      try{
-        // *** NEW ***
-        // Pass the sessionId as a query parameter (?sessionId=...)
+    // 2. Define the setup function
+    const initializeTodos = async () => {
+      try {
+        // *** NEW LOGIC ***
+        // If this is a brand new user, "seed" the database with default tasks first.
+        if (isNewUser) {
+          const defaultTasks = ["Task 1", "Task 2", "Task 3"];
+          
+          // We use Promise.all to send all 3 requests at the same time (faster)
+          await Promise.all(defaultTasks.map(task => 
+            fetch(base_url, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                task: task,
+                completed: false,
+                sessionId: currentSessionId // Use the variable, not the state (state might be stale)
+              })
+            })
+          ));
+        }
+
+        // 3. NOW fetch the list from the database
+        // (Whether it's the 3 we just added, or their old list from last time)
         const res = await fetch(`${base_url}?sessionId=${currentSessionId}`);
-        //res.ok is status code in the 200s
         if(!res.ok){
           throw new Error(`HTTP ERROR! Status: ${res.status}`)
         }
-        //RES = AWAIT FETCH GETS A DATA STREAM THEN 
-        const JSONdata = await res.json(); //RES.JSON PARSES THE STREAM (takes time to parse)
+        const JSONdata = await res.json();
         setTodos(JSONdata);
-      }catch(err){
+
+      } catch(err) {
         console.log(err);
-      }finally{
+      } finally {
         setIsLoading(false);
       }
     }
-    getTodos();
+
+    initializeTodos();
   }, []);
 
   async function addNewTodo(text){
