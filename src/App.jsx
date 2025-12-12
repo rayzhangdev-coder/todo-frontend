@@ -39,20 +39,22 @@ function App() {
         // *** NEW LOGIC ***
         // If this is a brand new user, "seed" the database with default tasks first.
         if (isNewUser) {
-          const defaultTasks = ["Task 3", "Task 2", "Task 1"];
+          const defaultTasks = ["Task 1", "Task 2", "Task 3"];
           
-          // We use Promise.all to send all 3 requests at the same time (faster)
-          await Promise.all(defaultTasks.map(task => 
-            fetch(base_url, {
+          // *** CHANGE IS HERE ***
+          // We use a 'for...of' loop instead of Promise.all.
+          // This forces the code to wait for Task 1 to finish before starting Task 2.
+          for (const task of defaultTasks) {
+             await fetch(base_url, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
                 task: task,
                 completed: false,
-                sessionId: currentSessionId // Use the variable, not the state (state might be stale)
+                sessionId: currentSessionId 
               })
-            })
-          ));
+            });
+          }
         }
 
         // 3. NOW fetch the list from the database
