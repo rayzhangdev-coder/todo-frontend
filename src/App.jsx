@@ -39,7 +39,7 @@ function App() {
         // *** NEW LOGIC ***
         // If this is a brand new user, "seed" the database with default tasks first.
         if (isNewUser) {
-          const defaultTasks = ["Task 1", "Task 2", "Task 3"];
+          const defaultTasks = ["Task 3", "Task 2", "Task 1"];
           
           // We use Promise.all to send all 3 requests at the same time (faster)
           await Promise.all(defaultTasks.map(task => 
