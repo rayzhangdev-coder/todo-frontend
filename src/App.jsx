@@ -6,8 +6,8 @@ import { v4 as uuidv4 } from 'uuid'; // <--- THIS IS WHERE UUID IS USED
 //im using pessimistic ui
 //npm run dev
 
-// const base_url = "https://ray-todo-api.onrender.com/todos";
-const base_url = "http://localhost:3000/todos";
+const base_url = "https://ray-todo-api.onrender.com/todos";
+// const base_url = "http://localhost:3000/todos";
 
 function App() {
   //for todos array, caching as a local array
