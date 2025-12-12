@@ -153,7 +153,7 @@ function App() {
     <h1>To-do List</h1>
     <span id="author">by Ray Zhang</span>
 
-    {/* ⭐️ CONDITIONAL RENDERING */}
+    {/* CONDITIONAL RENDERING */}
 
     {isLoading ? (
       // Display the DISABLED search bar and the loading messages
