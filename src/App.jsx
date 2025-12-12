@@ -2,22 +2,46 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import TodoForm from './components/TodoForm';
 import TodoItem from './components/TodoItem';
+import { v4 as uuidv4 } from 'uuid'; // <--- THIS IS WHERE UUID IS USED
 //im using pessimistic ui
 //npm run dev
 
-const base_url = "https://ray-todo-api.onrender.com/todos";
-// const base_url = "http://localhost:3000/todos";
+// const base_url = "https://ray-todo-api.onrender.com/todos";
+const base_url = "http://localhost:3000/todos";
+
 function App() {
   //for todos array, caching as a local array
   const [todos, setTodos] = useState([]);
   //you can't modify the stuff inside todos[] directly, you can only SET the entire STATE to something else using setTodos
   
+  // *** NEW ***
+  // State to hold the session ID
+  const [sessionId, setSessionId] = useState("");
+
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // *** NEW ***
+    // 1. Logic to get or generate the Session ID immediately on load
+    // *** NEW ***
+    // 1. Logic to get or generate the Session ID immediately on load
+    let currentSessionId = localStorage.getItem("my-todo-session-id");
+    
+    // CHECK: Does an ID exist in the browser's storage?
+    if (!currentSessionId) {
+      // IF NOT: Generate a new one right now
+      currentSessionId = uuidv4();
+      // AND: Save it to LocalStorage so we remember it next time
+      localStorage.setItem("user-session-id", currentSessionId);
+    }
+    
+    setSessionId(currentSessionId); // Save to state for other functions to use
+
     const getTodos = async() => {
       try{
-        const res = await fetch(base_url);
+        // *** NEW ***
+        // Pass the sessionId as a query parameter (?sessionId=...)
+        const res = await fetch(`${base_url}?sessionId=${currentSessionId}`);
         //res.ok is status code in the 200s
         if(!res.ok){
           throw new Error(`HTTP ERROR! Status: ${res.status}`)
@@ -43,7 +67,8 @@ function App() {
         },
         body: JSON.stringify({
           task: text,
-          completed: false
+          completed: false,
+          sessionId: sessionId // *** NEW *** Send ID to backend
         })
       });
       if(!res.ok){
@@ -66,7 +91,8 @@ function App() {
         //json.stringify turns evertyhing into a string, but the key's become strings inside strings
         body: JSON.stringify({
           task: todo.task,
-          completed: !todo.completed
+          completed: !todo.completed,
+          sessionId: sessionId // *** NEW *** Send ID to authorize update
         })
       });
       if(!res.ok){
@@ -89,7 +115,8 @@ function App() {
 
   async function deleteTodoFromList(id){
     try{
-      const res = await fetch(`${base_url}/${id}`, {
+      // *** NEW *** // Send sessionId as a query param for DELETE requests
+      const res = await fetch(`${base_url}/${id}?sessionId=${sessionId}`, {
         method: 'DELETE'
       });
       if(!res.ok){

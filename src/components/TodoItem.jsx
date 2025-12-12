@@ -7,7 +7,7 @@ function TodoItem( {todo, onToggle, onDelete} ){
           <input type="checkbox" 
           checked = {todo.completed}
           onChange={() => onToggle(todo)}
-          class = "checkbox"
+          className = "checkbox"
           />
           <span className="todo-text" style={{ textDecoration: todo.completed ? 'line-through' : 'none'} }>{todo.task}</span>
           <button onClick={ () => onDelete(todo.id)} style={{ marginLeft: '10px', color: 'red' }} className="delete-btn">delete</button>
