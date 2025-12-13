@@ -69,6 +69,7 @@ function App() {
       } catch(err) {
         console.log(err);
       } finally {
+        //sets loading to false after it finishes getting the data from get request
         setIsLoading(false);
       }
     }
