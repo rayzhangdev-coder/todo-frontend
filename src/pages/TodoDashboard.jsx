@@ -341,10 +341,15 @@ export default function TodoY() {
         <div className={styles.todos} ref={containerRef} onScroll={handleScroll}>
           {isLoading ? <div style={{color: 'white', padding: '20px'}}>
             Loading, please wait... <br/>
-            Press Enter to ADD task <br/>
-            Double click to EDIT task <br/>
-            Checkbox to mark task as DONE <br/>
-            Delete button to DELETE task <br/>
+            <br/>
+            -Press Enter to ADD task <br/>
+            <br/>
+            -Double click to EDIT task <br/>
+            <br/>
+            -Checkbox to mark task as DONE <br/>
+            <br/>
+            -Delete button to DELETE task <br/>
+            <br/>
             Note: Render server takes ~30 seconds to load... <br/>
             
           </div> : 
