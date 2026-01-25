@@ -11,7 +11,7 @@
 
 ## 1. Overview
 
-A high-performance React.js application for drag and drop task ordering using fractional indexing and optimistic UI with rollback, allowing users to reorder tasks with instant synchronization and efficiency. 
+A high-performance React.js application for drag and drop task ordering using fractional indexing and optimistic UI with rollback, allowing users to reorder tasks with instant synchronization and efficiency.  
 Note: for demo purposes, this app uses user sessions to manage todo items for each user. You can implement your own login system if you wish.
 
 ## 2. Features
