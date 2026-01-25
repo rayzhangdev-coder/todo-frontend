@@ -11,7 +11,8 @@
 
 ## 1. Overview
 
-A high-performance React.js application for task management. This frontend is specifically designed to work with a fractional indexing backend, allowing users to reorder tasks via drag-and-drop with instant synchronization. It manages user sessions locally to ensure persistent and private task lists.
+A high-performance React.js application for drag and drop task ordering using fractional indexing and optimistic UI with rollback, allowing users to reorder tasks with instant synchronization and efficiency. 
+Note: for demo purposes, this app uses user sessions to manage todo items for each user. You can implement your own login system if you wish.
 
 ## 2. Features
 
