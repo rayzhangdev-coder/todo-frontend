@@ -313,6 +313,8 @@ export default function TodoY() {
         <input 
           type="text" 
           placeholder="Enter task here..." 
+          disabled={isLoading}
+          style={{ cursor: isLoading ? 'not-allowed' : 'text' }}
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
           onKeyDown={addTask} 
